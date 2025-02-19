@@ -416,7 +416,7 @@ const Assests = () => {
               },
             }}
           >
-            <Grid
+            {/* <Grid
               container
               justifyContent={"space-between"}
               sx={{
@@ -440,7 +440,7 @@ const Assests = () => {
                 </StyledTotalCard>
               </Grid>
 
-              <Grid item md={3} sx={{ pl: 1, pr: 1 }}>
+               <Grid item md={3} sx={{ pl: 1, pr: 1 }}>
                 <StyledTotalCard
                   onClick={() => cardClickEvent("New")}
                   sx={{ cursor: "pointer", borderLeft: "10px solid #0284C9" }}
@@ -478,8 +478,8 @@ const Assests = () => {
                     {"Closed "}
                   </Typography>
                 </StyledTotalCard>
-              </Grid>
-            </Grid>
+              </Grid> 
+            </Grid> */}
             <Grid
               container
               sx={{
