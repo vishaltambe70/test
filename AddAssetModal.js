@@ -12,20 +12,28 @@ import {
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
-const AddAssetModal = ({ open, openHandler, submitHandler }) => {
+const AddServerModal = ({
+  open,
+  openHandler,
+  rowToEdit,
+  submitClickHandler,
+}) => {
   const validationSchema = Yup.object({
     assetName: Yup.string().required("Required"),
     assetOwner: Yup.string().required("Required"),
-    assetInUse: Yup.string().required("Required"),
-    fe: Yup.string().required("Required"),
-    feLanguageVersion: Yup.string().required("Required"),
-    be: Yup.string().required("Required"),
-    beLanguageVersion: Yup.string().required("Required"),
+    assetInUseFrom: Yup.date().required("Required"),
+    frontend: Yup.string().required("Required"),
+    frontendLanguageVersion: Yup.string().nullable(true),
+    backend: Yup.string().required("Required"),
+    backendLanguageVersion: Yup.string().nullable(true),
     databaseUsed: Yup.string().required("Required"),
-    dbVersion: Yup.string().required("Required"),
-    dbIpAddress: Yup.string().required("Required"),
-    tablesName: Yup.string().required("Required"),
+    databaseVersion: Yup.string().required("Required"),
+    databaseIpAddress: Yup.string().required("Required"),
+    tablesName: Yup.string().nullable(true),
     codeRepoUrl: Yup.string().url("Invalid URL").required("Required"),
   });
 
@@ -34,11 +42,11 @@ const AddAssetModal = ({ open, openHandler, submitHandler }) => {
       <DialogTitle
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-backendtween",
           alignItems: "center",
         }}
       >
-        <>Add Asset</>
+        {rowToEdit ? <>Edit Asset</> : <>Add Asset</>}
         <CloseIcon
           onClick={() => openHandler()}
           color="primary"
@@ -49,63 +57,148 @@ const AddAssetModal = ({ open, openHandler, submitHandler }) => {
       <DialogContent>
         <Formik
           initialValues={{
-            assetName: "",
-            assetOwner: "",
-            assetInUse: "",
-            fe: "",
-            feLanguageVersion: "",
-            be: "",
-            beLanguageVersion: "",
-            databaseUsed: "",
-            dbVersion: "",
-            dbIpAddress: "",
-            tablesName: "",
-            codeRepoUrl: "",
+            assetId: rowToEdit?.assetId || "",
+            assetName: rowToEdit?.assetName || "",
+            assetOwner: rowToEdit?.assetOwner || "",
+            assetInUseFrom: rowToEdit?.assetInUseFrom || "",
+            frontend: rowToEdit?.frontend || "",
+            frontendLanguageVersion: rowToEdit?.frontendLanguageVersion || "",
+            backend: rowToEdit?.backend || "",
+            backendLanguageVersion: rowToEdit?.backendLanguageVersion || "",
+            databaseUsed: rowToEdit?.databaseUsed || "",
+            databaseVersion: rowToEdit?.databaseVersion || "",
+            databaseIpAddress: rowToEdit?.databaseIpAddress || "",
+            tablesName: rowToEdit?.tablesName || "",
+            codeRepoUrl: rowToEdit?.codeRepoUrl || "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            submitHandler(values);
+            console.log("valuuuuuuuuu", values);
+            //edit add row id here
+            submitClickHandler(values);
           }}
         >
           {(props) => (
             <Form>
               <Grid container spacing={2} sx={{ p: 1 }}>
                 {[
-                  { name: "assetName", label: "Asset Name" },
-                  { name: "assetOwner", label: "Asset Owner" },
-                  { name: "assetInUse", label: "Asset In Use" },
-                  { name: "fe", label: "FE" },
-                  { name: "feLanguageVersion", label: "FE Language Version" },
-                  { name: "be", label: "BE" },
-                  { name: "beLanguageVersion", label: "BE Language Version" },
-                  { name: "databaseUsed", label: "Database Used" },
-                  { name: "dbVersion", label: "DB Version" },
-                  { name: "dbIpAddress", label: "DB IP Address" },
-                  { name: "tablesName", label: "Tables Name" },
-                  { name: "codeRepoUrl", label: "Code Repo URL" },
+                  { name: "assetName", label: "Asset Name", type: "input" },
+                  { name: "assetOwner", label: "Asset Owner", type: "input" },
+                  {
+                    name: "assetInUseFrom",
+                    label: "Asset In Use",
+                    type: "date",
+                  },
+                  { name: "frontend", label: "Frontend", type: "input" },
+                  {
+                    name: "frontendLanguageVersion",
+                    label: "frontend Language Version",
+                    type: "input",
+                  },
+                  { name: "backend", label: "Backend", type: "input" },
+                  {
+                    name: "backendLanguageVersion",
+                    label: "backend Language Version",
+                    type: "input",
+                  },
+                  {
+                    name: "databaseUsed",
+                    label: "Database Used",
+                    type: "input",
+                  },
+                  {
+                    name: "databaseVersion",
+                    label: "DB Version",
+                    type: "input",
+                  },
+                  {
+                    name: "databaseIpAddress",
+                    label: "DB IP Address",
+                    type: "input",
+                  },
+                  { name: "tablesName", label: "Tables Name", type: "input" },
+                  {
+                    name: "codeRepoUrl",
+                    label: "Code Repo URL",
+                    type: "input",
+                  },
                 ].map((field) => (
-                  <Grid item xs={12} md={6} key={field.name}>
-                    <Field name={field.name}>
-                      {({ field: formikField, meta }) => (
-                        <TextField
-                          {...formikField}
-                          variant="outlined"
-                          size="small"
-                          label={field.label}
-                          fullWidth
-                          error={meta.touched && Boolean(meta.error)}
-                          helperText={meta.touched && meta.error}
-                        />
-                      )}
-                    </Field>
-                  </Grid>
+                  <>
+                    {field?.type === "input" ? (
+                      <Grid item xs={12} md={6} key={field.name}>
+                        <Field name={field.name}>
+                          {({ field: formikField, meta }) => (
+                            <TextField
+                              {...formikField}
+                              variant="outlined"
+                              size="small"
+                              label={field.label}
+                              fullWidth
+                              error={meta.touched && Boolean(meta.error)}
+                              helperText={meta.touched && meta.error}
+                            />
+                          )}
+                        </Field>
+                      </Grid>
+                    ) : (
+                      <Grid item xs={12} md={6}>
+                        <Field name={field.name}>
+                          {({ field, meta }) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateTimePicker
+                                {...field}
+                                label="Asset In Use"
+                                value={dayjs(props.values.assetInUse)}
+                                onChange={(value) =>
+                                  props.setFieldValue(field.name, value)
+                                }
+                                slotProps={{
+                                  textField: {
+                                    fullWidth: true,
+                                    size: "small",
+                                    error: meta.touched && Boolean(meta.error),
+                                    helperText: meta.touched && meta.error,
+                                  },
+                                }}
+                              />
+                            </LocalizationProvider>
+                          )}
+                        </Field>
+                      </Grid>
+                    )}
+                  </>
                 ))}
+                {/* Asset In Use (Date & Time Picker) */}
+                {/* <Grid item xs={12} md={6}>
+                  <Field name="assetInUse">
+                    {({ field, meta }) => (
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateTimePicker
+                          {...field}
+                          label="Asset In Use"
+                          value={dayjs(props.values.assetInUse)}
+                          onChange={(value) =>
+                            props.setFieldValue("assetInUse", value)
+                          }
+                          slotProps={{
+                            textField: {
+                              fullWidth: true,
+                              size: "small",
+                              error: meta.touched && Boolean(meta.error),
+                              helperText: meta.touched && meta.error,
+                            },
+                          }}
+                        />
+                      </LocalizationProvider>
+                    )}
+                  </Field>
+                </Grid> */}
               </Grid>
 
               <DialogActions>
                 <Button onClick={openHandler}>Cancel</Button>
                 <Button type="submit" variant="contained">
-                  Add Asset
+                  {rowToEdit ? "Save" : "Add"}
                 </Button>
               </DialogActions>
             </Form>
@@ -116,4 +209,4 @@ const AddAssetModal = ({ open, openHandler, submitHandler }) => {
   );
 };
 
-export default AddAssetModal;
+export default AddServerModal;
