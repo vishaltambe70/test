@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Information Sheet (CIS)</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 30px;
+      background-color: #fff;
+    }
+
+    .cis-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .cis-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 8px;
+    }
+
+    .cis-header img {
+      height: 45px;
+    }
+
+    .cis-header .meta {
+      text-align: right;
+      font-size: 13px;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 25px 0 5px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    h3 {
+      text-align: center;
+      margin: 8px 0 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+    }
+
+    table th,
+    table td {
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    table th {
+      background-color: #f2f2f2;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .title-row {
+      background-color: #f8e8e8;
+      font-weight: bold;
+    }
+
+    .section-heading {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      color: #c0392b;
+      border-left: 5px solid #c0392b;
+      padding-left: 10px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 10px;
+      border-top: 2px solid #e74c3c;
+      font-size: 13px;
+      text-align: center;
+      color: #555;
+    }
+
+    .logo {
+      margin-bottom: 10px;
+    }
+
+    /* Make long text inside cells look neat */
+    td p {
+      margin: 6px 0;
+    }
+
+    td ul {
+      margin: 4px 0 4px 18px;
+      padding: 0;
+    }
+
+    td ul li {
+      margin-bottom: 4px;
+    }
+
+    .policy-clause {
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cis-container">
+    <!-- Header -->
+    <div class="cis-header">
+      <div class="logo">
+        <img src="https://www.manipalcigna.com/themes/custom/manipalcigna/logo.svg" alt="ManipalCigna Logo" />
+      </div>
+      <div class="meta">
+        <div>Toll Free No: 1800-102-4462</div>
+        <div>Website: <a href="https://www.manipalcigna.com" target="_blank">www.manipalcigna.com</a></div>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h2>ManipalCigna ProHealth Group Insurance Policy</h2>
+    <h3>CUSTOMER INFORMATION SHEET / KNOW YOUR POLICY</h3>
+
+    <!-- Table -->
+    <p>This document provides key information about your policy. You are also advised to go through your policy document.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:5%">S. No</th>
+          <th style="width:30%">Title</th>
+          <th>Description (Refer Policy Clause Number in next column)</th>
+          <th style="width:10%">Policy Clause</th>
+        </tr>
+      </thead>
+
+      <tbody id="cis-table-body">
+        <!-- STATIC ROWS -->
+        <tr>
+          <td>1</td>
+          <td>Name of Insurance Product / Policy</td>
+          <td>ManipalCigna ProHealth Group Insurance Policy</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Policy Number</td>
+          <td>MPS #108900000421/00/00</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td>3</td>
+          <td>Type of Insurance Product / Policy</td>
+          <td>*Indemnity (Where insured losses are covered up to the Sum Insured under the policy)</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td>4</td>
+          <td>Sum Insured (Basis) (Along with amount)</td>
+          <td>Floater Sum Insured – Where all members under the policy have a single sum insured limit which may be utilized by any or all of the members. <br />As per Member Annexure</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <!-- DYNAMIC COVERAGE SECTION -->
+        <tr class="title-row">
+          <td>5</td>
+          <td colspan="3">Policy Coverage (What the policy covers?)</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>In-patient Hospitalization</td>
+          <td>
+            Covered up to the Sum Insured for any disease / Illness or Injury.<br /><br />
+            <strong>Day Care Treatment:</strong> All Day Care Treatments / Procedures are covered up to Sum Insured.<br /><br />
+            <strong>Pre-hospitalization Medical Expenses:</strong> Covered up to 30 days before date of hospitalization.<br /><br />
+            <strong>Post-hospitalization Medical Expenses:</strong> Covered up to 60 days post discharge.<br /><br />
+            <strong>Road Ambulance:</strong> Reimbursement of ambulance expenses covered up to the Sum Insured.
+          </td>
+          <td class="policy-clause">D.I.1 – D.I.5</td>
+        </tr>
+
+        <!-- Example next section -->
+        <tr class="title-row">
+          <td>6</td>
+          <td colspan="3">Exclusions (What the policy does not cover)</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.4 Investigation & Evaluation – Code: Excl 04</td>
+          <td>
+            a. Expenses related to any admission primarily for diagnostics and evaluation purposes only are excluded.<br />
+            b. Any diagnostic expenses which are not related or incidental to the current diagnosis and treatment are excluded.
+          </td>
+          <td class="policy-clause">E.I.4</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.5 Rest Cure, rehabilitation and respite care – Code: Excl 05</td>
+          <td>
+            a. Expenses related to any admission primarily for enforced bed rest and not for receiving treatment.<br />
+            b. This also includes custodial care either at home or in a nursing facility for personal care such as help with daily living, dressing, moving, or skilled nursing.
+          </td>
+          <td class="policy-clause">E.I.5</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.6 Obesity / Weight Control – Code: Excl 06</td>
+          <td>
+            Expenses related to surgical treatment of obesity that does not fulfil the below conditions:
+            <ul>
+              <li>Surgery advised by Doctor under clinical protocols</li>
+              <li>Age ≥ 18 years</li>
+              <li>BMI ≥ 40 or ≥ 35 with co-morbidities</li>
+            </ul>
+          </td>
+          <td class="policy-clause">E.I.6</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.7 Change-of-Gender Treatments – Code: Excl 07</td>
+          <td>Expenses related to any treatment, including surgical management, to change characteristics of the body to those of the opposite sex.</td>
+          <td class="policy-clause">E.I.7</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.8 Cosmetic or Plastic Surgery – Code: Excl 08</td>
+          <td>Expenses for cosmetic surgery or any treatment to change appearance unless for reconstruction after accident, burns or cancer.</td>
+          <td class="policy-clause">E.I.8</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>E.I.9 Hazardous or Adventure Sports – Code: Excl 09</td>
+          <td>Expenses related to treatment due to participation in professional hazardous or adventure sports like rafting, racing, diving, etc.</td>
+          <td class="policy-clause">E.I.9</td>
+        </tr>
+
+        <tr class="title-row">
+          <td>7</td>
+          <td colspan="3">Waiting Period</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>Initial Waiting Period</td>
+          <td>Covered from Day 1 (not applicable in case of continuous renewal or accidents)</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>Specific Waiting Periods</td>
+          <td>
+            Covered from Day 1 for: <br />
+            a) Cataract <br />
+            b) Hysterectomy for Menorrhagia or Fibromyoma or prolapse of Uterus <br />
+            c) Knee Replacement Surgery <br />
+            d) Varicose Veins and Ulcers
+          </td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr class="title-row">
+          <td>8</td>
+          <td colspan="3">Financial Limits of Coverage</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>Sub-limit</td>
+          <td>Nil</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>Co-payment</td>
+          <td>Nil</td>
+          <td class="policy-clause"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>Deductible</td>
+          <td>Annual Aggregate – Nil</td>
+          <td class="policy-clause"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Footer -->
+    <div class="footer">
+      ManipalCigna ProHealth Group Insurance Policy UIN: MCIHLGP21172V032021
+    </div>
+  </div>
+</body>
+</html>
